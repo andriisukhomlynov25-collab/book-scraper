@@ -346,7 +346,7 @@ def get_product_price(driver):
 # ─────────────────────────────────────────────────────────────
 #  Функція для одного потоку: один лінк → одна ціна
 # ─────────────────────────────────────────────────────────────
-def scrape_single_link(link, book_title, row_idx, link_idx):
+def scrape_single_link(link, book_title, row_idx, link_idx, year="", is_rare=False):
     # Кожен потік будує свій drive_service (httplib2 не є thread-safe)
     thread_drive = build('drive', 'v3', credentials=creds)
     driver = init_driver()
@@ -373,6 +373,8 @@ def scrape_single_link(link, book_title, row_idx, link_idx):
                 title_field.clear()
                 clean_t = re.sub(r'[^a-zA-Zа-яА-ЯёЁєЄіІїЇґҐ0-9\s]', ' ', book_title)
                 short_t = " ".join(clean_t.split()[:6]).strip()
+                if is_rare and year:
+                    short_t = f"{short_t} {year}"
                 title_field.send_keys(short_t)
                 try:
                     search_btn = driver.find_element(
@@ -397,7 +399,7 @@ def scrape_single_link(link, book_title, row_idx, link_idx):
             return None
 
         currency = "$"
-        if any(x in link for x in ["yakaboo.ua", "rozetka.com", "piramidabooks.net"]):
+        if any(x in link for x in ["yakaboo.ua", "rozetka.com", "piramidabooks.net", "rvv-kniga.com", "olx.ua"]):
             currency = "грн"
         elif "allegro.pl" in link:
             currency = "zł"
@@ -449,25 +451,46 @@ def process_books():
     records = worksheet.get_all_values()[1:]
     columns_map = {0: 'F', 1: 'G', 2: 'H'}
 
-    sites = [
+    regular_sites = [
         "amazon.com", "ebay.com", "abebooks.com",
         "biblio.com", "globusbooks.com", "hup.harvard.edu",
         "allegro.pl", "booksamillion.com", "thriftbooks.com",
         "yakaboo.ua", "piramidabooks.net", "elefant.ro", "rozetka.com.ua"
     ]
-    allowed_base_domains = [s.split('.')[0] for s in sites]
+    # Сайти для раритетних/антикварних видань: фокус на Україну та Європу
+    rare_sites = [
+        "yakaboo.ua", "rozetka.com.ua", "olx.ua", "rvv-kniga.com",
+        "allegro.pl", "abebooks.com", "biblio.com",
+    ]
 
     for i, row in enumerate(records, start=2):
         if len(row) < 3 or not row[2]:
             continue
+        if "список цінних видань" in row[0].lower():
+            continue
 
         book_title = row[2]
-        log_message(f"📘 Рядок {i}: {book_title[:50]}...")
+        year = row[3].strip() if len(row) > 3 else ""
+        is_rare = year.isdigit() and int(year) < 1970
+
+        if is_rare:
+            log_message(f"📘 Рядок {i} [раритет {year}]: {book_title[:50]}...")
+        else:
+            log_message(f"📘 Рядок {i}: {book_title[:50]}...")
 
         # --- SERPER: знаходимо посилання ---
         try:
-            site_query = " OR ".join([f"site:{s}" for s in sites])
-            res = get_serper_data(f"{book_title} price ({site_query})")
+            if is_rare:
+                search_sites = rare_sites
+                site_query = " OR ".join([f"site:{s}" for s in search_sites])
+                search_query = f"{book_title} {year} ({site_query}) -reprint -facsimile"
+            else:
+                search_sites = regular_sites
+                site_query = " OR ".join([f"site:{s}" for s in search_sites])
+                search_query = f"{book_title} price ({site_query})"
+
+            allowed_domains = [s.split('.')[0] for s in search_sites]
+            res = get_serper_data(search_query)
             all_items = res.get('organic', []) if res else []
 
             links = []
@@ -475,7 +498,7 @@ def process_books():
             for item in all_items:
                 link = item['link']
                 domain = urllib.parse.urlparse(link).netloc.lower()
-                if any(base in domain for base in allowed_base_domains) and domain not in seen_domains:
+                if any(base in domain for base in allowed_domains) and domain not in seen_domains:
                     if "abebooks.com" in domain and any(ord(c) > 127 for c in link):
                         continue
                     links.append(link)
@@ -501,7 +524,7 @@ def process_books():
 
         with ThreadPoolExecutor(max_workers=len(links)) as executor:
             futures = {
-                executor.submit(scrape_single_link, link, book_title, i, idx): idx
+                executor.submit(scrape_single_link, link, book_title, i, idx, year, is_rare): idx
                 for idx, link in enumerate(links)
             }
             for future in as_completed(futures):
