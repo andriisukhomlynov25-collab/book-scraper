@@ -1,6 +1,9 @@
+import os
 import undetected_chromedriver as uc
 import time
 import sys
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def test_ebay(with_stealth=False):
     options = uc.ChromeOptions()
@@ -10,7 +13,7 @@ def test_ebay(with_stealth=False):
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-popup-blocking")
     
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     if with_stealth:
         from selenium_stealth import stealth

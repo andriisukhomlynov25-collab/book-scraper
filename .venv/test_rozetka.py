@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
@@ -6,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def simulate_human_interaction(driver):
     try:
@@ -59,7 +62,7 @@ def test_rozetka():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо Chrome для Rozetka.com.ua...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     book_title = "Щупак І. Я. Всесвітня історія (рівень стандарту)"
     direct_url = "https://rozetka.com.ua/ua/402850905/p402850905/"

@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
@@ -6,6 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import random
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def simulate_human_interaction(driver):
     try:
@@ -63,7 +66,7 @@ def test_globus():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо Chrome для Globus Books...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     book_title = "Л. Перепелкіна — Екуменізм: путь, ведущий в погибель"
     direct_url = "https://www.globusbooks.com/pages/books/24896/l-perepelkina/ekumenizm-put-veduschij-k-pogibeli"

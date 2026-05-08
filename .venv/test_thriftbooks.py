@@ -1,9 +1,12 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def extract_thriftbooks(driver):
     wait = WebDriverWait(driver, 10)
@@ -54,7 +57,7 @@ def test_thriftbooks():
     options.add_argument("--window-size=1920,1080")
     
     print("Запускаємо браузер...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     url = "https://www.thriftbooks.com/w/pen-and-ink-drawing-a-series-of-drawings-showing-its-perfect-adaptability-to-the-modern-processes-of-reproduction_george-hartnell-bartlett/20661764/?srsltid=AfmBOoq7O4h6fYMDjchfOlpG-iK5Y3Q25QUNrX3xPs0KBgD-xre4KPqd#edition=68402468&idiq=59708386"
     

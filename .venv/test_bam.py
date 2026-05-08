@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
@@ -53,6 +54,8 @@ def extract_bam(driver):
 
 import random
 
+from config import DRIVER_PATH, CHROME_VERSION
+
 def simulate_human(driver):
     # Імітація людського гортання сторінки
     try:
@@ -73,7 +76,7 @@ def test_bam():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо браузер...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     url = "https://www.booksamillion.com/p/Pen-Ink-Drawing/George-Hartnell-Bartlett/9781016901239"
     

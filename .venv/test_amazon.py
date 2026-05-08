@@ -1,4 +1,7 @@
+import os
 import re
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def test_price_parser(price_text):
     print(f"Original text: '{price_text}'")

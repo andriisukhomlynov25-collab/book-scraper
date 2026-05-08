@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import urllib.parse
@@ -5,6 +6,8 @@ import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def extract_olx_search_results(driver):
     wait = WebDriverWait(driver, 10)
@@ -63,7 +66,7 @@ def test_olx_search():
     options.add_argument("--window-size=1920,1080")
     
     print("Запускаємо браузер...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     long_title = "Колдовство въ Юго-Западной Руси въ XVIII ст. - Арсенія Сѣлецкаго (репрінт)"
     # Для кращого пошуку на OLX краще брати перші 4-5 слів, особливо якщо є старі символи "ъ", "ѣ"

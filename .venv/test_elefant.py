@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
@@ -6,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def simulate_human_interaction(driver):
     try:
@@ -56,7 +59,7 @@ def test_elefant():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо Chrome для Elefant.ro...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     book_title = "Plokhy S. Cernobîl: Istoria unei catastrofe nucleare / Editura Trei. București"
     direct_url = "https://www.elefant.ro/cernobil-istoria-unei-catastrofe-nucleare_48326507-65fb-43af-ac08-cacc0045bf42"

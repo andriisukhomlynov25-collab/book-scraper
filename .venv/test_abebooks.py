@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import urllib.parse
@@ -5,6 +6,8 @@ import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def get_price(driver):
     page_source = driver.page_source
@@ -53,7 +56,7 @@ def test_abebooks():
     options.add_argument("--window-size=1920,1080")
     
     print("Starting Chrome...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     # Використовуємо проблемну довгу назву з вашого скріншоту
     long_title = "Soldier's Manual of Common Tasks Warrior Leader Skills Level 2, 3, 4, STP 21-24-SMCT Headquarters Department of the Army Washington DC United States Government US Army 2008 464 p"

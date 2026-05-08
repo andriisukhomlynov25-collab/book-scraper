@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import urllib.parse
@@ -7,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import random
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def simulate_human_interaction(driver):
     try:
@@ -63,7 +66,7 @@ def test_biblio():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо Chrome для Biblio...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     book_title = "Gogol, Nikolai. The Overcoat and Other Short Stories. — New York : Dover Publications, Inc., 1992. — 112 p."
     direct_url = "https://www.biblio.com/book/overcoat-other-short-stories-gogol-nikolai/d/120340272?srsltid=AfmBOooijsgLiGLboB5Ck28RYGX7XVjFiNNs8HDbHroUhgetbiW76zMa"

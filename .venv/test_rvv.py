@@ -1,9 +1,12 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def extract_rvv_kniga(driver):
     wait = WebDriverWait(driver, 10)
@@ -56,7 +59,7 @@ def test_rvv():
     options.add_argument("--window-size=1920,1080")
     
     print("Запускаємо браузер...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     url = "https://rvv-kniga.com/product/suspilni-verstvy-galyczkoyi-rusy-xiv-xv-v-rozvidka-ivana-lynnychenka-antykvarna-knyga-1899-r/?srsltid=AfmBOopfGQ_SIl8F66-4BeRbbBOr9zJHneTBzuP8fjjbNe2_X_hHIYP5"
     

@@ -1,3 +1,4 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
@@ -6,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def simulate_human_interaction(driver):
     try:
@@ -27,17 +30,21 @@ def extract_yakaboo_details(driver):
     
     try:
         # Селектори для Yakaboo
-        price_selectors = [".price__value", ".ui-price-display", ".product-sidebar__price .price__value"]
-        
+        price_selectors = [".product-price", ".base-product__price", ".price__value", ".product-sidebar__price .price__value"]
+
         for sel in price_selectors:
             try:
-                element = driver.find_element(By.CSS_SELECTOR, sel)
-                text = element.get_attribute("innerText") or element.text
-                if text and any(c.isdigit() for c in text):
-                    # Очищення ціни
-                    clean_price = re.sub(r'[^\d.,]', '', text).replace(',', '.')
-                    details["price"] = float(clean_price)
-                    print(f"Знайдено ціну через {sel}: {details['price']}")
+                for element in driver.find_elements(By.CSS_SELECTOR, sel):
+                    if not element.is_displayed():
+                        continue
+                    text = element.get_attribute("innerText") or element.text
+                    if text and any(c.isdigit() for c in text):
+                        text = text.splitlines()[0]
+                        clean_price = re.sub(r'[^\d.,]', '', text).replace(',', '.')
+                        details["price"] = float(clean_price)
+                        print(f"Знайдено ціну через {sel}: {details['price']}")
+                        break
+                if details["price"]:
                     break
             except:
                 continue
@@ -51,7 +58,7 @@ def test_yakaboo():
     options.add_argument("--disable-blink-features=AutomationControlled")
     
     print("Запускаємо Chrome для Yakaboo...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     book_title = "Gabriel García Márquez. One Hundred Years of Solitude"
     direct_url = "https://www.yakaboo.ua/one-hundred-years-of-solitude-1412618.html"
@@ -65,7 +72,7 @@ def test_yakaboo():
         
         # Закриття поп-апів
         try:
-            close_buttons = driver.find_elements(By.CSS_SELECTOR, ".ui-btn-close, .language-button")
+            close_buttons = driver.find_elements(By.CSS_SELECTOR, ".ui-btn-close")
             for btn in close_buttons:
                 if btn.is_displayed():
                     btn.click()

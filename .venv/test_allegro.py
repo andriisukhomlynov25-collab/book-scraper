@@ -1,9 +1,12 @@
+import os
 import undetected_chromedriver as uc
 import time
 import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import DRIVER_PATH, CHROME_VERSION
 
 def extract_allegro_results(driver, target_year):
     wait = WebDriverWait(driver, 10)
@@ -81,7 +84,7 @@ def test_allegro():
     options.add_argument("--window-size=1920,1080")
     
     print("Запускаємо браузер...")
-    driver = uc.Chrome(options=options, version_main=147)
+    driver = uc.Chrome(options=options, version_main=CHROME_VERSION, driver_executable_path=DRIVER_PATH)
     
     url = "https://allegro.pl/listing?string=karol%20szajnocha%2C%20dwa%20lata&srsltid=AfmBOoofsCzTy5hB6A4RNWTexO0tny40WiCOK-Btlh4IzGREVXVLWIen"
     target_year = "1877" # З вашої таблиці (рядок 4)
