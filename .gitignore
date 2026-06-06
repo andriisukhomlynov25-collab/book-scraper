@@ -1,11 +1,7 @@
-.venv/bin/
-.venv/lib/
-.venv/include/
-.venv/pyvenv.cfg
-.venv/.Python
-.venv/CACHEDIR.TAG
+.venv/
+venv/
+.idea/
 __pycache__/
 *.pyc
 .DS_Store
-github_ed25519
-github_ed25519.pub
+chatgpt_chrome_profile/

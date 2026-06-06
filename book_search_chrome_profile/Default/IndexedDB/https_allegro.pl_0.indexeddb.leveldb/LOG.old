@@ -1,0 +1,31 @@
+2026/05/18-21:02:01.148 2b3dd5 Creating DB /Users/getapp/PycharmProjects/book_scraper/book_search_chrome_profile/Default/IndexedDB/https_allegro.pl_0.indexeddb.leveldb since it was missing.
+2026/05/18-21:02:01.153 2b3dd5 Reusing MANIFEST /Users/getapp/PycharmProjects/book_scraper/book_search_chrome_profile/Default/IndexedDB/https_allegro.pl_0.indexeddb.leveldb/MANIFEST-000001
+2026/05/18-21:02:01.205 2b3dd3 Level-0 table #5: started
+2026/05/18-21:02:01.207 2b3dd3 Level-0 table #5: 651 bytes OK
+2026/05/18-21:02:01.209 2b3dd3 Delete type=0 #3
+2026/05/18-21:02:01.209 2b3dd3 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/05/18-21:02:01.242 2b3dd5 Level-0 table #7: started
+2026/05/18-21:02:01.243 2b3dd5 Level-0 table #7: 657 bytes OK
+2026/05/18-21:02:01.245 2b3dd5 Delete type=0 #4
+2026/05/18-21:02:01.246 2b3dd3 Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/05/18-21:02:10.784 2b3dd5 Level-0 table #9: started
+2026/05/18-21:02:10.789 2b3dd5 Level-0 table #9: 1639 bytes OK
+2026/05/18-21:02:10.791 2b3dd5 Delete type=0 #6
+2026/05/18-21:02:10.791 2b3dd2 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at '\x00\x04\x00\x00\x05' @ 97 : 1
+2026/05/18-21:02:10.791 2b3dd2 Compacting 1@0 + 1@1 files
+2026/05/18-21:02:10.793 2b3dd2 Generated table #10@0: 44 keys, 1253 bytes
+2026/05/18-21:02:10.793 2b3dd2 Compacted 1@0 + 1@1 files => 1253 bytes
+2026/05/18-21:02:10.794 2b3dd2 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/05/18-21:02:10.794 2b3dd2 Delete type=2 #9
+2026/05/18-21:02:10.795 2b3ddc Manual compaction at level-0 from '\x00\x04\x00\x00\x05' @ 97 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/05/18-21:02:10.834 2b3dd5 Level-0 table #12: started
+2026/05/18-21:02:10.835 2b3dd5 Level-0 table #12: 648 bytes OK
+2026/05/18-21:02:10.838 2b3dd5 Delete type=2 #7
+2026/05/18-21:02:10.838 2b3dd5 Delete type=0 #8
+2026/05/18-21:02:10.838 2b3dd2 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x00\x00\x05' @ 114 : 1
+2026/05/18-21:02:10.839 2b3dd2 Compacting 1@0 + 1@1 files
+2026/05/18-21:02:10.840 2b3dd2 Generated table #13@0: 48 keys, 1288 bytes
+2026/05/18-21:02:10.841 2b3dd2 Compacted 1@0 + 1@1 files => 1288 bytes
+2026/05/18-21:02:10.843 2b3dd2 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/05/18-21:02:10.843 2b3dd2 Delete type=2 #12
+2026/05/18-21:02:10.843 2b3dd2 Manual compaction at level-0 from '\x00\x05\x00\x00\x05' @ 114 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)

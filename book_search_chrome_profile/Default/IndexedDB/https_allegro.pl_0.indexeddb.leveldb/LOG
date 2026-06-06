@@ -1,0 +1,15 @@
+2026/05/18-22:48:56.868 2cbe9e Reusing MANIFEST /Users/getapp/PycharmProjects/book_scraper/book_search_chrome_profile/Default/IndexedDB/https_allegro.pl_0.indexeddb.leveldb/MANIFEST-000001
+2026/05/18-22:48:56.868 2cbe9e Recovering log #11
+2026/05/18-22:48:56.869 2cbe9e Reusing old log /Users/getapp/PycharmProjects/book_scraper/book_search_chrome_profile/Default/IndexedDB/https_allegro.pl_0.indexeddb.leveldb/000011.log 
+2026/05/18-22:48:56.869 2cbe9e Delete type=2 #10
+2026/05/18-22:48:56.953 2cbeaa Level-0 table #16: started
+2026/05/18-22:48:56.956 2cbeaa Level-0 table #16: 643 bytes OK
+2026/05/18-22:48:56.958 2cbeaa Delete type=0 #11
+2026/05/18-22:48:56.959 2cbe9e Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 135 : 1
+2026/05/18-22:48:56.959 2cbe9e Compacting 1@0 + 1@1 files
+2026/05/18-22:48:56.961 2cbe9e Generated table #17@0: 50 keys, 1315 bytes
+2026/05/18-22:48:56.961 2cbe9e Compacted 1@0 + 1@1 files => 1315 bytes
+2026/05/18-22:48:56.962 2cbe9e compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/05/18-22:48:56.963 2cbe9e Delete type=2 #16
+2026/05/18-22:48:56.964 2cbe9e Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 135 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/05/18-22:48:56.988 2cbea1 Manual compaction at level-0 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)
